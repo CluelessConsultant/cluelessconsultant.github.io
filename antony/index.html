@@ -337,6 +337,28 @@
     .rail__track { right: calc(var(--sc-gutter) + 5.5rem); }
   }
 
+  /* headings never outgrow their column: size them to the column, not only the window */
+  .stop__head, .degree { container-type: inline-size; }
+  .stop h2 { font-size: min(var(--sc-t-3xl), 15cqi); }
+  .stop .sub { font-size: min(var(--sc-t-2xl), 12cqi); }
+  .degree b { font-size: min(var(--sc-t-2xl), 9cqi); }
+
+  @media (max-width: 860px) {
+    .stop h2 { font-size: min(var(--sc-t-2xl), 12cqi); }
+    .stop .sub { font-size: min(var(--sc-t-xl), 10cqi); }
+  }
+
+  /* tablets and small laptops: one column per chapter, rail shows dots only */
+  @media (min-width: 861px) and (max-width: 1180px) {
+    :root { --rail-w: 4.75rem; }
+    .rail a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .stop__grid { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .stop__head { position: static; }
+    .stop h2 { font-size: min(var(--sc-t-3xl), 9cqi); }
+    .flight__frame { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sc-5); }
+    .offer__list { grid-template-columns: 1fr 1fr; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .portrait__plate, .portrait__subject { translate: none !important; }
   }
