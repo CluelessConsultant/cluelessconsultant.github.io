@@ -166,15 +166,18 @@
   .plan svg { width: 100%; height: auto; display: block; overflow: visible; }
   .plan path, .plan circle { fill: none; stroke: var(--sc-ink); stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
   .plan__walls path { stroke-width: 7; transition: stroke-dashoffset 1400ms var(--sc-ease-out); }
-  .plan__furniture path, .plan__furniture circle { stroke-width: 1.6; stroke: var(--sc-accent); transition: stroke-dashoffset 1200ms var(--sc-ease-out) 900ms; }
-  .plan__furniture .plan__rug { stroke-dasharray: 1 1; stroke-width: 1; opacity: .5; }
-  .plan__dim path { stroke-width: 1; stroke: var(--sc-ink-soft); transition: stroke-dashoffset 800ms var(--sc-ease-out) 1600ms; }
+  .plan__wood path { stroke-width: 2.2; stroke: var(--sc-accent); fill: rgba(29,63,143,.08); fill-opacity: 0; transition: stroke-dashoffset 1300ms var(--sc-ease-out) 900ms, fill-opacity 600ms var(--sc-ease-out) 1900ms; }
+  .plan.sc-in .plan__wood path { fill-opacity: 1; }
+  .plan text.plan__note { fill: var(--sc-accent); font-size: 11px; }
+  .plan__cap { display: flex; align-items: center; gap: var(--sc-3); }
+  .plan__key { width: 1.4rem; height: .7rem; border: 2px solid var(--sc-accent); background: rgba(29,63,143,.08); flex: none; }
   .plan text { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; fill: var(--sc-ink-soft); opacity: 0; transition: opacity 600ms var(--sc-ease-out) 1900ms; }
   .plan.sc-in path, .plan.sc-in circle { stroke-dashoffset: 0; }
   .plan.sc-in text { opacity: 1; }
   @media (prefers-reduced-motion: reduce) {
     .plan path, .plan circle { stroke-dashoffset: 0; transition: none; }
     .plan text { opacity: 1; transition: none; }
+    .plan__wood path { fill-opacity: 1; }
   }
 
   /* the decision: a wipe from paper into night */
@@ -306,6 +309,9 @@
     .chart .city text { font-size: 40px; }
     .chart .city text.code { font-size: 18px; }
     .chart .lat-label, .chart .city text.code { display: none; }
+    .plan text.plan__note { display: none; }
+    .plan text { font-size: 18px; }
+    .plan { padding: var(--sc-4); }
 
     .arrival { min-height: 80svh; padding-block: var(--sc-8); }
     .contact__links li { grid-template-columns: 1fr; gap: var(--sc-1); }
@@ -397,39 +403,35 @@
       <div class="stop__body" data-sc-in data-sc-stagger="70">
         <p class="years"><b><span data-sc-count="0 25" data-sc-count-ms="1600">25</span></b><span>Jahre war mein Vater da schon im Innenausbau.</span></p>
         <p>Ich wollte meine eigene Firma. Also habe ich Accenture verlassen und Interiors and Home Solutions gegründet, für Innenausbau und Interior Design.</p>
-        <p>Alles lag bei mir: Material beschaffen, Handwerker und Arbeiter beauftragen, die Baustelle führen, bis zum letzten Schliff. Die ersten zwei Kunden habe ich selbst gewonnen und beide Projekte bis zur Abnahme geliefert.</p>
+        <p>Meine Kunden hatten ein neu gebautes Haus, in dem nur die Wände standen. Ich habe alle Holzarbeiten geliefert, die ein Haus braucht, bevor man einziehen kann: die Küche mit ihren vielen Schränken, Einbauschränke in den Schlafzimmern, das TV-Möbel und alles Weitere aus Holz.</p>
+        <p>Alles lag bei mir: Material beschaffen, Handwerker und Arbeiter beauftragen, die Baustelle führen, bis zum letzten Schliff. Die ersten zwei Kunden habe ich selbst gewonnen und beide Häuser bis zur Abnahme fertiggestellt.</p>
         <ol class="chain" aria-label="Was ich verantwortet habe">
           <li>Material</li><li>Handwerker</li><li>Arbeiter</li><li>Fertigstellung</li>
         </ol>
         <figure class="plan" data-sc-in>
-          <svg viewBox="0 0 600 420" role="img" aria-label="Illustration: Grundriss einer Wohnung mit Wohnbereich, Küche und Schlafzimmer">
-            <g class="plan__dim">
-              <path pathLength="1" d="M20 14 H580 M20 8 V20 M580 8 V20"/>
-              <text x="300" y="8" text-anchor="middle">8,40 m</text>
-            </g>
+          <svg viewBox="0 0 600 420" role="img" aria-label="Illustration: Grundriss eines Hauses. Hervorgehoben sind die Holzarbeiten: Küchenschränke, Einbauschränke in zwei Schlafzimmern und ein TV-Möbel.">
             <g class="plan__walls">
-              <path pathLength="1" d="M260 400 H20 V30 H580 V400 H320"/>
-              <path pathLength="1" d="M370 30 V150 M370 205 V230 H580"/>
+              <path pathLength="1" d="M270 400 H20 V30 H580 V400 H330"/>
+              <path pathLength="1" d="M360 30 V115 M360 165 V265 M360 315 V400 M360 215 H580"/>
             </g>
-            <g class="plan__furniture">
-              <path pathLength="1" d="M420 60 h130 v140 h-130 Z"/>
-              <path pathLength="1" d="M430 70 h50 v26 h-50 Z M490 70 h50 v26 h-50 Z"/>
-              <path pathLength="1" d="M420 130 h130"/>
-              <path pathLength="1" d="M60 300 h220 v60 h-220 Z M60 300 v-22 h22 v22 M258 300 v-22 h22 v22"/>
-              <path pathLength="1" d="M70 150 h200 v110 h-200 Z" class="plan__rug"/>
-              <circle pathLength="1" cx="170" cy="205" r="26"/>
-              <path pathLength="1" d="M300 70 h46 v46 h-46 Z"/>
-              <path pathLength="1" d="M390 390 H560 V250"/>
-              <path pathLength="1" d="M420 290 h100 v40 h-100 Z"/>
-              <circle pathLength="1" cx="45" cy="55" r="12"/>
+            <g class="plan__wood">
+              <path pathLength="1" d="M34 42 h200 v30 h-200 Z M74 42 v30 M114 42 v30 M154 42 v30 M194 42 v30"/>
+              <path pathLength="1" d="M34 72 h30 v120 h-30 Z M34 112 h30 M34 152 h30"/>
+              <path pathLength="1" d="M60 364 h190 v24 h-190 Z M123 364 v24 M187 364 v24"/>
+              <path pathLength="1" d="M396 42 h170 v30 h-170 Z M438 42 v30 M481 42 v30 M523 42 v30"/>
+              <path pathLength="1" d="M396 358 h170 v30 h-170 Z M438 358 v30 M481 358 v30 M523 358 v30"/>
             </g>
             <g class="plan__labels">
-              <text x="170" y="120" text-anchor="middle">WOHNEN</text>
-              <text x="485" y="222" text-anchor="middle">SCHLAFEN</text>
-              <text x="470" y="355" text-anchor="middle">KÜCHE</text>
+              <text x="150" y="128" text-anchor="middle">KÜCHE</text>
+              <text x="190" y="270" text-anchor="middle">WOHNEN</text>
+              <text x="190" y="352" text-anchor="middle" class="plan__note">TV-MÖBEL</text>
+              <text x="470" y="140" text-anchor="middle">SCHLAFEN</text>
+              <text x="470" y="300" text-anchor="middle">SCHLAFEN</text>
+              <text x="481" y="92" text-anchor="middle" class="plan__note">EINBAUSCHRANK</text>
+              <text x="481" y="348" text-anchor="middle" class="plan__note">EINBAUSCHRANK</text>
             </g>
           </svg>
-          <figcaption class="label">Illustration · Grundriss einer Wohnung</figcaption>
+          <figcaption class="plan__cap"><span class="plan__key" aria-hidden="true"></span><span class="label">Illustration · in Blau: meine Holzarbeiten</span></figcaption>
         </figure>
       </div>
     </div>
