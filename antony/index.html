@@ -145,7 +145,8 @@
 
   .facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); }
   .facts li { display: grid; gap: var(--sc-2); align-content: start; padding-top: var(--sc-4); border-top: 1px solid var(--hair); }
-  .facts b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .facts b { white-space: nowrap; font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  #firma .facts b { font-size: clamp(1.5rem, 2.1vw, 2.1rem); }
   .facts li > span { font-size: var(--sc-t-sm); line-height: 1.5; color: var(--sc-ink-soft); }
 
   /* firm */
@@ -293,7 +294,7 @@
     .stop h2 { font-size: var(--sc-t-2xl); }
     .stop__body p { font-size: var(--sc-t-base); }
     .facts { grid-template-columns: 1fr; gap: var(--sc-3); }
-    .facts li { grid-template-columns: 4.5rem 1fr; align-items: baseline; }
+    .facts li { grid-template-columns: 1fr; gap: var(--sc-1); }
     .modules { grid-template-columns: 1fr; }
     .decision h2 { font-size: var(--sc-t-3xl); }
     .today h2 { font-size: var(--sc-t-2xl); }
@@ -321,6 +322,21 @@
   html.is-night .rail__now { color: var(--night-ink); }
   @media (min-width: 861px) { .rail__now { display: none; } }
 
+  .lang {
+    position: fixed; z-index: 60; top: calc(env(safe-area-inset-top, 0px) + 1rem); right: var(--sc-gutter);
+    display: flex; align-items: center; gap: .15rem; font-family: var(--mono); font-size: var(--sc-t-xs); letter-spacing: .1em;
+    color: var(--sc-ink-soft); background: color-mix(in oklab, var(--sc-canvas) 90%, transparent); padding: .2rem .35rem; border-radius: 2px;
+    transition: color 240ms var(--sc-ease-out), background-color 240ms var(--sc-ease-out);
+  }
+  .lang button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: .45rem .5rem; cursor: pointer; }
+  .lang button[aria-pressed="true"] { color: var(--sc-ink); font-weight: 500; text-decoration: underline; text-underline-offset: .3em; }
+  html.is-night .lang { color: var(--night-soft); background: color-mix(in oklab, var(--night) 90%, transparent); }
+  html.is-night .lang button[aria-pressed="true"] { color: var(--night-ink); }
+  @media (max-width: 860px) {
+    .lang { top: calc(env(safe-area-inset-top, 0px) + .2rem); right: calc(var(--sc-gutter) - .5rem); background: none; }
+    .rail__track { right: calc(var(--sc-gutter) + 5.5rem); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .portrait__plate, .portrait__subject { translate: none !important; }
   }
@@ -328,22 +344,26 @@
 </head>
 <body>
 
-<nav class="rail" aria-label="Stationen">
+<nav class="rail" aria-label="Stationen" data-i18n-aria-label="a0">
   <span class="rail__now" aria-hidden="true">Start</span>
   <div class="rail__track">
     <div class="rail__done"></div>
     <ol>
       <li><a href="#start"><span>Start</span></a></li>
       <li><a href="#bangalore"><span>Bangalore</span></a></li>
-      <li><a href="#firma"><span>Eigene Firma</span></a></li>
-      <li><a href="#flug"><span>Der Flug</span></a></li>
+      <li><a href="#firma"><span data-i18n="t4">Eigene Firma</span></a></li>
+      <li><a href="#flug"><span data-i18n="t5">Der Flug</span></a></li>
       <li><a href="#berlin"><span>Berlin</span></a></li>
-      <li><a href="#heute"><span>Heute</span></a></li>
-      <li><a href="#kontakt"><span>Kontakt</span></a></li>
+      <li><a href="#heute"><span data-i18n="t6">Heute</span></a></li>
+      <li><a href="#kontakt"><span data-i18n="t7">Kontakt</span></a></li>
     </ol>
     <div class="rail__plane" aria-hidden="true"><svg viewBox="-16 -16 32 32"><use href="#plane"/></svg></div>
   </div>
 </nav>
+
+<div class="lang" role="group" aria-label="Sprache / Language">
+  <button type="button" data-lang="de" aria-pressed="true">DE</button><span aria-hidden="true">|</span><button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -358,14 +378,14 @@
     <div class="hero__grid">
       <div class="hero__copy" data-sc-in data-sc-stagger="70">
         <p class="label">Antony Mervyn Shreyas · Berlin</p>
-        <h1>Von Bangalore nach <em>Berlin.</em></h1>
-        <p class="hero__lede">Ich habe bei Accenture in Indien angefangen, ein eigenes Unternehmen gegründet und es wieder geschlossen, um in Deutschland Management zu studieren. Heute arbeite ich jeden Tag mit KI. Mein Ziel: Unternehmen helfen, KI einzuführen, mit KI-Kompetenz für ihre Teams und einer Veränderung, die die Menschen mitnimmt.</p>
-        <p class="ticket" aria-label="Von Bangalore nach Berlin, rund 7.130 Kilometer"><b>BLR</b><span class="ticket__line"><svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#plane"/></svg></span><b>BER</b><span>· 7.130 km</span></p>
-        <a class="cta" href="mailto:antonyshreyas777@gmail.com?subject=Gespr%C3%A4ch">E-Mail schreiben</a>
+        <h1 data-i18n="t0">Von Bangalore nach <em>Berlin.</em></h1>
+        <p class="hero__lede" data-i18n="t1">Ich habe bei Accenture in Indien angefangen, ein eigenes Unternehmen gegründet und es wieder geschlossen, um in Deutschland Management zu studieren. Heute arbeite ich jeden Tag mit KI. Mein Ziel: Unternehmen helfen, KI einzuführen, mit KI-Kompetenz für ihre Teams und einer Veränderung, die die Menschen mitnimmt.</p>
+        <p class="ticket" aria-label="Von Bangalore nach Berlin, rund 7.130 Kilometer" data-i18n-aria-label="a1"><b>BLR</b><span class="ticket__line"><svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#plane"/></svg></span><b>BER</b><span data-i18n="t2">· 7.130 km</span></p>
+        <a class="cta" href="mailto:antonyshreyas777@gmail.com?subject=Gespr%C3%A4ch" data-i18n="t3">E-Mail schreiben</a>
       </div>
       <div class="portrait" id="portrait">
         <div class="portrait__plate" data-sc-parallax="-0.9"><img src="assets/plate.webp" width="1200" height="1500" alt=""></div>
-        <div class="portrait__subject" data-sc-parallax="0.35"><img src="assets/subject.webp" width="1200" height="1500" alt="Porträt von Antony Shreyas"></div>
+        <div class="portrait__subject" data-sc-parallax="0.35"><img src="assets/subject.webp" width="1200" height="1500" alt="Porträt von Antony Shreyas" data-i18n-alt="a2"></div>
       </div>
     </div>
   </section>
@@ -374,20 +394,20 @@
   <section class="stop page" id="bangalore" data-stop="1" aria-labelledby="bangalore-h">
     <div class="stop__grid">
       <div class="stop__head" data-sc-in data-sc-stagger="60">
-        <p class="label">Bangalore · 2019 bis 2023</p>
-        <h2 id="bangalore-h">Die Brücke zwischen drei Teams.</h2>
-        <p class="stop__role">Cloud Operations Associate bei Accenture, Oktober 2021 bis Januar 2023</p>
+        <p class="label" data-i18n="t8">Bangalore · 2019 bis 2023</p>
+        <h2 id="bangalore-h" data-i18n="t9">Die Brücke zwischen drei Teams.</h2>
+        <p class="stop__role" data-i18n="t10">Cloud Operations Associate bei Accenture, Oktober 2021 bis Januar 2023</p>
         <img class="logo logo--accenture" src="assets/logos/accenture.svg" width="163" height="43" alt="Accenture">
       </div>
       <div class="stop__body" data-sc-in data-sc-stagger="70">
-        <p class="small">Geboren in Bangalore. 2019 Bachelor of Engineering in Mechatronik, danach der Einstieg bei Accenture.</p>
-        <p>Ich war das Bindeglied zwischen den Fachteams unserer Kunden, ihren Technikteams und meinem eigenen Technikteam bei Accenture. Für mehr als zehn Kunden, darunter E.ON, GSK und Whirlpool, habe ich jeden Tag Störungen und Änderungen koordiniert und dafür gesorgt, dass alle Seiten wussten, was gerade passiert.</p>
+        <p class="small" data-i18n="t11">Geboren in Bangalore. 2019 Bachelor of Engineering in Mechatronik, danach der Einstieg bei Accenture.</p>
+        <p data-i18n="t12">Ich war das Bindeglied zwischen den Fachteams unserer Kunden, ihren Technikteams und meinem eigenen Technikteam bei Accenture. Für mehr als zehn Kunden, darunter E.ON, GSK und Whirlpool, habe ich jeden Tag Störungen und Änderungen koordiniert und dafür gesorgt, dass alle Seiten wussten, was gerade passiert.</p>
         <ul class="facts">
-          <li><b><span data-sc-count="0 10">10</span>+</b><span>Kundenkonten, jeden Tag im Blick</span></li>
-          <li><b><span data-sc-count="0 3">3</span></b><span>neue Analysten eingearbeitet und in Prozesse und ServiceNow geschult</span></li>
-          <li><b>P1</b><span>ein kritischer Ausfall bei Whirlpool: mit der Führungsebene im Call, bis zur Lösung</span></li>
+          <li><b><span data-sc-count="0 10">10</span>+</b><span data-i18n="t13">Kundenkonten, jeden Tag im Blick</span></li>
+          <li><b><span data-sc-count="0 3">3</span></b><span data-i18n="t14">neue Analysten eingearbeitet und in Prozesse und ServiceNow geschult</span></li>
+          <li><b>P1</b><span data-i18n="t15">ein kritischer Ausfall bei Whirlpool: mit der Führungsebene im Call, bis zur Lösung</span></li>
         </ul>
-        <p class="lesson">Dort habe ich gelernt: Technik läuft erst rund, wenn die Menschen dahinter miteinander reden.</p>
+        <p class="lesson" data-i18n="t16">Dort habe ich gelernt: Technik läuft erst rund, wenn die Menschen dahinter miteinander reden.</p>
       </div>
     </div>
   </section>
@@ -396,20 +416,25 @@
   <section class="stop page" id="firma" data-stop="2" aria-labelledby="firma-h">
     <div class="stop__grid">
       <div class="stop__head" data-sc-in data-sc-stagger="60">
-        <p class="label">Bangalore · Februar bis August 2023</p>
-        <h2 id="firma-h">Mein eigenes Unternehmen.</h2>
-        <p class="stop__role">Gründer und Projektleiter, Interiors and Home Solutions</p>
+        <p class="label" data-i18n="t17">Bangalore · Februar bis August 2023</p>
+        <h2 id="firma-h" data-i18n="t18">Mein eigenes Unternehmen.</h2>
+        <p class="stop__role" data-i18n="t19">Gründer und Projektleiter, Interiors and Home Solutions</p>
       </div>
       <div class="stop__body" data-sc-in data-sc-stagger="70">
-        <p class="years"><b><span data-sc-count="0 25" data-sc-count-ms="1600">25</span></b><span>Jahre war mein Vater da schon im Innenausbau.</span></p>
-        <p>Ich wollte meine eigene Firma. Also habe ich Accenture verlassen und Interiors and Home Solutions gegründet, für Innenausbau und Interior Design.</p>
-        <p>Meine Kunden hatten ein neu gebautes Haus, in dem nur die Wände standen. Ich habe alle Holzarbeiten geliefert, die ein Haus braucht, bevor man einziehen kann: die Küche mit ihren vielen Schränken, Einbauschränke in den Schlafzimmern, das TV-Möbel und alles Weitere aus Holz.</p>
-        <p>Alles lag bei mir: Material beschaffen, Handwerker und Arbeiter beauftragen, die Baustelle führen, bis zum letzten Schliff. Die ersten zwei Kunden habe ich selbst gewonnen und beide Häuser bis zur Abnahme fertiggestellt.</p>
-        <ol class="chain" aria-label="Was ich verantwortet habe">
-          <li>Material</li><li>Handwerker</li><li>Arbeiter</li><li>Fertigstellung</li>
+        <p class="years"><b><span data-sc-count="0 25" data-sc-count-ms="1600">25</span></b><span data-i18n="t20">Jahre war mein Vater da schon im Innenausbau.</span></p>
+        <p data-i18n="t21">Ich wollte meine eigene Firma. Also habe ich Accenture verlassen und Interiors and Home Solutions gegründet, für Innenausbau und Interior Design.</p>
+        <p data-i18n="t22">Meine Kunden hatten ein neu gebautes Haus, in dem nur die Wände standen. Ich habe alle Holzarbeiten geliefert, die ein Haus braucht, bevor man einziehen kann: die Küche mit ihren vielen Schränken, Einbauschränke in den Schlafzimmern, das TV-Möbel und alles Weitere aus Holz.</p>
+        <p data-i18n="t23">Alles lag bei mir: Material beschaffen, Handwerker und Arbeiter beauftragen, die Baustelle führen, bis zum letzten Schliff. Die ersten zwei Kunden habe ich selbst gewonnen und beide Häuser bis zur Abnahme fertiggestellt.</p>
+        <ul class="facts">
+          <li><b>2</b><span data-i18n="t24">Häuser, von den nackten Wänden bis zum Einzug</span></li>
+          <li><b data-i18n="tx1">20.000 €</b><span data-i18n="t25">Umsatz in sieben Monaten</span></li>
+          <li><b data-i18n="tx2">20 %</b><span data-i18n="t26">Gewinnmarge, ungefähr</span></li>
+        </ul>
+        <ol class="chain" aria-label="Was ich verantwortet habe" data-i18n-aria-label="a3">
+          <li data-i18n="t27">Material</li><li data-i18n="t28">Handwerker</li><li data-i18n="t29">Arbeiter</li><li data-i18n="t30">Fertigstellung</li>
         </ol>
         <figure class="plan" data-sc-in>
-          <svg viewBox="0 0 600 420" role="img" aria-label="Illustration: Grundriss eines Hauses. Hervorgehoben sind die Holzarbeiten: Küchenschränke, Einbauschränke in zwei Schlafzimmern und ein TV-Möbel.">
+          <svg viewBox="0 0 600 420" role="img" aria-label="Illustration: Grundriss eines Hauses. Hervorgehoben sind die Holzarbeiten: Küchenschränke, Einbauschränke in zwei Schlafzimmern und ein TV-Möbel." data-i18n-aria-label="a4">
             <g class="plan__walls">
               <path pathLength="1" d="M270 400 H20 V30 H580 V400 H330"/>
               <path pathLength="1" d="M360 30 V115 M360 165 V265 M360 315 V400 M360 215 H580"/>
@@ -422,16 +447,16 @@
               <path pathLength="1" d="M396 358 h170 v30 h-170 Z M438 358 v30 M481 358 v30 M523 358 v30"/>
             </g>
             <g class="plan__labels">
-              <text x="150" y="128" text-anchor="middle">KÜCHE</text>
-              <text x="190" y="270" text-anchor="middle">WOHNEN</text>
-              <text x="190" y="352" text-anchor="middle" class="plan__note">TV-MÖBEL</text>
-              <text x="470" y="140" text-anchor="middle">SCHLAFEN</text>
-              <text x="470" y="300" text-anchor="middle">SCHLAFEN</text>
-              <text x="481" y="92" text-anchor="middle" class="plan__note">EINBAUSCHRANK</text>
-              <text x="481" y="348" text-anchor="middle" class="plan__note">EINBAUSCHRANK</text>
+              <text x="150" y="128" text-anchor="middle" data-i18n="t31">KÜCHE</text>
+              <text x="190" y="270" text-anchor="middle" data-i18n="t32">WOHNEN</text>
+              <text x="190" y="352" text-anchor="middle" class="plan__note" data-i18n="t33">TV-MÖBEL</text>
+              <text x="470" y="140" text-anchor="middle" data-i18n="t34">SCHLAFEN</text>
+              <text x="470" y="300" text-anchor="middle" data-i18n="t34">SCHLAFEN</text>
+              <text x="481" y="92" text-anchor="middle" class="plan__note" data-i18n="t35">EINBAUSCHRANK</text>
+              <text x="481" y="348" text-anchor="middle" class="plan__note" data-i18n="t35">EINBAUSCHRANK</text>
             </g>
           </svg>
-          <figcaption class="plan__cap"><span class="plan__key" aria-hidden="true"></span><span class="label">Illustration · in Blau: meine Holzarbeiten</span></figcaption>
+          <figcaption class="plan__cap"><span class="plan__key" aria-hidden="true"></span><span class="label" data-i18n="t36">Illustration · in Blau: meine Holzarbeiten</span></figcaption>
         </figure>
       </div>
     </div>
@@ -442,8 +467,8 @@
     <div class="page">
       <div class="decision__in" data-sc-reveal="up" data-sc-reveal-at="0.04 0.38">
         <p class="label">August 2023</p>
-        <h2 id="decision-h">Ich habe die Firma <em>geschlossen.</em></h2>
-        <p>Beim Aufbau habe ich gemerkt: Die technische Seite kann ich. <strong>Aber um ein Unternehmen wirklich zu führen, fehlte mir das Management.</strong> Also bin ich dorthin gegangen, wo ich es lernen wollte. Mein Traum hieß Deutschland.</p>
+        <h2 id="decision-h" data-i18n="t37">Ich habe die Firma <em>geschlossen.</em></h2>
+        <p data-i18n="t38">Beim Aufbau habe ich gemerkt: Die technische Seite kann ich. <strong>Aber um ein Unternehmen wirklich zu führen, fehlte mir das Management.</strong> Also bin ich dorthin gegangen, wo ich es lernen wollte. Mein Traum hieß Deutschland.</p>
       </div>
     </div>
   </section>
@@ -458,13 +483,13 @@
             <p class="readout__km" style="margin:0"><span id="km">0</span><small>km</small></p>
           </div>
           <div class="lines">
-            <p data-sc-cue="0 0.4 0 0.25">Abflug in <em>Bangalore.</em></p>
-            <p data-sc-cue="0.36 0.72 0.25 0.25">Im Gepäck: Jahre bei Accenture, ein eigenes Unternehmen und eine klare Lücke.</p>
-            <p data-sc-cue="0.7 1 0.2 0.04">Landung in <em>Berlin.</em> Neues Land, neue Sprache, ein Master in International Management.</p>
+            <p data-sc-cue="0 0.4 0 0.25" data-i18n="t39">Abflug in <em>Bangalore.</em></p>
+            <p data-sc-cue="0.36 0.72 0.25 0.25" data-i18n="t40">Im Gepäck: Jahre bei Accenture, ein eigenes Unternehmen und eine klare Lücke.</p>
+            <p data-sc-cue="0.7 1 0.2 0.04" data-i18n="t41">Landung in <em>Berlin.</em> Neues Land, neue Sprache, ein Master in International Management.</p>
           </div>
         </div>
         <div class="chart-wrap">
-          <svg class="chart" id="chart" viewBox="0 0 1060 640" role="img" aria-label="Flugroute von Bangalore nach Berlin, rund 7.130 Kilometer">
+          <svg class="chart" id="chart" viewBox="0 0 1060 640" role="img" aria-label="Flugroute von Bangalore nach Berlin, rund 7.130 Kilometer" data-i18n-aria-label="a5">
             <g id="grid"></g>
             <path id="route-plan" class="route-plan" d="M 826 548 Q 650 70 184 132"/>
             <path id="route-flown" class="route-flown" d="M 826 548 Q 650 70 184 132"/>
@@ -472,13 +497,13 @@
               <circle class="halo" cx="826" cy="548" r="16"/>
               <circle class="core" cx="826" cy="548" r="6"/>
               <text x="850" y="560">Bangalore</text>
-              <text class="code" x="852" y="584">BLR · 12,97° N 77,59° O</text>
+              <text class="code" x="852" y="584" data-i18n="t42">BLR · 12,97° N 77,59° O</text>
             </g>
             <g class="city" id="city-ber">
               <circle class="halo" cx="184" cy="132" r="16"/>
               <circle class="core" cx="184" cy="132" r="6"/>
               <text x="208" y="120">Berlin</text>
-              <text class="code" x="210" y="146">BER · 52,52° N 13,40° O</text>
+              <text class="code" x="210" y="146" data-i18n="t43">BER · 52,52° N 13,40° O</text>
             </g>
             <g id="plane-g" class="plane"><use href="#plane" transform="scale(1.9)"/></g>
           </svg>
@@ -491,40 +516,40 @@
   <section class="stop stop--berlin page" id="berlin" data-stop="4" aria-labelledby="berlin-h">
     <div class="stop__grid">
       <div class="stop__head" data-sc-in data-sc-stagger="60">
-        <p class="label">Berlin · seit September 2023</p>
-        <h2 id="berlin-h">Das Management, das mir gefehlt hat.</h2>
+        <p class="label" data-i18n="t44">Berlin · seit September 2023</p>
+        <h2 id="berlin-h" data-i18n="t45">Das Management, das mir gefehlt hat.</h2>
       </div>
       <div class="stop__body" data-sc-in data-sc-stagger="70">
         <div class="degree">
           <img class="logo logo--hsf" src="assets/logos/fresenius.svg" width="133" height="32" alt="Hochschule Fresenius">
           <b>Master of Arts, International Management</b>
-          <span>Hochschule Fresenius Berlin, abgeschlossen 2026</span>
+          <span data-i18n="t46">Hochschule Fresenius Berlin, abgeschlossen 2026</span>
         </div>
         <ul class="modules">
-          <li><span class="label">Managing Transformation &amp; Change</span><span>Wie Organisationen Veränderung planen und die Menschen dabei mitnehmen.</span></li>
-          <li><span class="label">Leadership &amp; HR in Global Organizations</span><span>Führung über Länder und Kulturen hinweg.</span></li>
-          <li><span class="label">Entrepreneurship</span><span>Was ich in meiner Firma erlebt hatte, jetzt mit Methode.</span></li>
-          <li><span class="label">Digital Project Management</span><span>Projekte planen, steuern und sauber dokumentieren.</span></li>
+          <li><span class="label">Managing Transformation &amp; Change</span><span data-i18n="t47">Wie Organisationen Veränderung planen und die Menschen dabei mitnehmen.</span></li>
+          <li><span class="label">Leadership &amp; HR in Global Organizations</span><span data-i18n="t48">Führung über Länder und Kulturen hinweg.</span></li>
+          <li><span class="label">Entrepreneurship</span><span data-i18n="t49">Was ich in meiner Firma erlebt hatte, jetzt mit Methode.</span></li>
+          <li><span class="label">Digital Project Management</span><span data-i18n="t50">Projekte planen, steuern und sauber dokumentieren.</span></li>
         </ul>
-        <p class="small">Meine Masterarbeit über emotionale und künstliche Intelligenz in interkulturellen Teams wurde 2026 als Fachartikel veröffentlicht. <a class="link-out" href="https://doi.org/10.52398/gjsd.2026.v6.i1.pp150-170">Artikel lesen</a></p>
+        <p class="small" data-i18n="t51">Meine Masterarbeit über emotionale und künstliche Intelligenz in interkulturellen Teams wurde 2026 als Fachartikel veröffentlicht. <a class="link-out" href="https://doi.org/10.52398/gjsd.2026.v6.i1.pp150-170">Artikel lesen</a></p>
       </div>
     </div>
 
     <div class="stop__grid" style="margin-top: calc(var(--sc-section) * .6)">
       <div class="stop__head" data-sc-in data-sc-stagger="60">
-        <p class="label">Berlin · ab 2024</p>
-        <h3 class="sub">Arbeiten in Deutschland.</h3>
+        <p class="label" data-i18n="t52">Berlin · ab 2024</p>
+        <h3 class="sub" data-i18n="t53">Arbeiten in Deutschland.</h3>
       </div>
       <ol class="jobs">
         <li class="job" data-sc-in data-sc-stagger="60">
-          <div class="job__when"><div><p class="label">Okt 2024 bis Jan 2025</p><h3>CCVOSSEL GmbH, Berlin</h3></div><img class="logo logo--ccv" src="assets/logos/ccvossel-full.png" width="743" height="433" alt="CCVOSSEL"></div>
-          <div><p>Mein erster Job in Deutschland, in einem deutschen Team. IT-Betrieb für 26 Anwendungen nach den Sicherheitsstandards von BMW: Komponenten bestellen, Zertifikate ausstellen, Wissensartikel pflegen.</p></div>
+          <div class="job__when"><div><p class="label" data-i18n="t54">Okt 2024 bis Jan 2025</p><h3>CCVOSSEL GmbH, Berlin</h3></div><img class="logo logo--ccv" src="assets/logos/ccvossel-full.png" width="743" height="433" alt="CCVOSSEL"></div>
+          <div><p data-i18n="t55">Mein erster Job in Deutschland, in einem deutschen Team. IT-Betrieb für 26 Anwendungen nach den Sicherheitsstandards von BMW: Komponenten bestellen, Zertifikate ausstellen, Wissensartikel pflegen.</p></div>
         </li>
         <li class="job" data-sc-in data-sc-stagger="60">
-          <div class="job__when"><div><p class="label">März bis Aug 2025</p><h3>Accenture GmbH, Berlin</h3></div><img class="logo logo--accenture" src="assets/logos/accenture.svg" width="163" height="43" alt="Accenture"></div>
+          <div class="job__when"><div><p class="label" data-i18n="t56">März bis Aug 2025</p><h3>Accenture GmbH, Berlin</h3></div><img class="logo logo--accenture" src="assets/logos/accenture.svg" width="163" height="43" alt="Accenture"></div>
           <div>
-            <p>Zurück bei Accenture, diesmal als Management Consulting Associate in einem laufenden SAP-Programm.</p>
-            <p>Analysen und Präsentationen für Termine mit dem Senior Management, Jira-Dashboards für die Programmleitung und automatisierte Feedback- und Reporting-Abläufe für ein Team von sieben Personen.</p>
+            <p data-i18n="t57">Zurück bei Accenture, diesmal als Management Consulting Associate in einem laufenden SAP-Programm.</p>
+            <p data-i18n="t58">Analysen und Präsentationen für Termine mit dem Senior Management, Jira-Dashboards für die Programmleitung und automatisierte Feedback- und Reporting-Abläufe für ein Team von sieben Personen.</p>
           </div>
         </li>
       </ol>
@@ -534,38 +559,38 @@
   <!-- HEUTE: purpose -->
   <section class="today page" id="heute" data-stop="5" aria-labelledby="heute-h">
     <div class="today__in" data-sc-in data-sc-stagger="80">
-      <p class="label">Berlin · heute</p>
-      <h2 id="heute-h">Heute arbeite ich jeden Tag mit KI. Und ich sehe, <em>was sie mit Teams macht.</em></h2>
+      <p class="label" data-i18n="t59">Berlin · heute</p>
+      <h2 id="heute-h" data-i18n="t60">Heute arbeite ich jeden Tag mit KI. Und ich sehe, <em>was sie mit Teams macht.</em></h2>
       <div class="today__cols">
-        <p>Wenn KI in ein Team kommt, ist die Technik selten das Problem. Es gibt Unsicherheit und oft echte Angst. Die menschliche Seite der Einführung entscheidet, ob es funktioniert.</p>
-        <p>Genau da will ich ansetzen: Teams begleiten, damit sie KI ohne Angst einsetzen und produktiver arbeiten. Mit dem Blick eines Technikers und der Erfahrung eines Gründers.</p>
+        <p data-i18n="t61">Wenn KI in ein Team kommt, ist die Technik selten das Problem. Es gibt Unsicherheit und oft echte Angst. Die menschliche Seite der Einführung entscheidet, ob es funktioniert.</p>
+        <p data-i18n="t62">Genau da will ich ansetzen: Teams begleiten, damit sie KI ohne Angst einsetzen und produktiver arbeiten. Mit dem Blick eines Technikers und der Erfahrung eines Gründers.</p>
       </div>
       <div class="offer" id="angebot">
-        <h3 class="offer__h">Wobei ich Ihr Unternehmen unterstützen kann.</h3>
+        <h3 class="offer__h" data-i18n="t63">Wobei ich Ihr Unternehmen unterstützen kann.</h3>
         <ul class="offer__list">
           <li>
-            <h4>KI-Kompetenz im Team aufbauen</h4>
-            <p>Ich zeige Ihren Mitarbeitenden, wie sie KI-Werkzeuge wie Claude sicher und sinnvoll im Arbeitsalltag nutzen, an ihren eigenen Aufgaben statt an Beispielen aus dem Lehrbuch.</p>
-            <p class="offer__proof"><span class="label">Erfahrung</span>Ich arbeite jeden Tag mit KI und habe bei Accenture neue Analysten eingearbeitet und geschult.</p>
+            <h4 data-i18n="t64">KI-Kompetenz im Team aufbauen</h4>
+            <p data-i18n="t65">Ich zeige Ihren Mitarbeitenden, wie sie KI-Werkzeuge wie Claude sicher und sinnvoll im Arbeitsalltag nutzen, an ihren eigenen Aufgaben statt an Beispielen aus dem Lehrbuch.</p>
+            <p class="offer__proof" data-i18n="t66"><span class="label">Erfahrung</span>Ich arbeite jeden Tag mit KI und habe bei Accenture neue Analysten eingearbeitet und geschult.</p>
           </li>
           <li>
-            <h4>Die Einführung als Veränderung begleiten</h4>
-            <p>Ich nehme Unsicherheit und Angst ernst, bevor daraus Widerstand wird: klar erklären, was sich ändert, Fragen Raum geben, die Menschen mitnehmen.</p>
-            <p class="offer__proof"><span class="label">Erfahrung</span>Master mit Managing Transformation &amp; Change, Masterarbeit und Fachartikel über psychologische Sicherheit und KI-Werkzeuge in Teams.</p>
+            <h4 data-i18n="t67">Die Einführung als Veränderung begleiten</h4>
+            <p data-i18n="t68">Ich nehme Unsicherheit und Angst ernst, bevor daraus Widerstand wird: klar erklären, was sich ändert, Fragen Raum geben, die Menschen mitnehmen.</p>
+            <p class="offer__proof" data-i18n="t69"><span class="label">Erfahrung</span>Master mit Managing Transformation &amp; Change, Masterarbeit und Fachartikel über psychologische Sicherheit und KI-Werkzeuge in Teams.</p>
           </li>
           <li>
-            <h4>Abläufe mit KI vereinfachen</h4>
-            <p>Ich finde wiederkehrende Aufgaben, die Ihrem Team Zeit kosten, und baue einfache Lösungen dafür. So wird KI im Alltag spürbar produktiver.</p>
-            <p class="offer__proof"><span class="label">Erfahrung</span>Bei Accenture Berlin habe ich Feedback- und Reporting-Abläufe für ein Team von sieben Personen automatisiert. Den KI-Coach unten habe ich selbst gebaut.</p>
+            <h4 data-i18n="t70">Abläufe mit KI vereinfachen</h4>
+            <p data-i18n="t71">Ich finde wiederkehrende Aufgaben, die Ihrem Team Zeit kosten, und baue einfache Lösungen dafür. So wird KI im Alltag spürbar produktiver.</p>
+            <p class="offer__proof" data-i18n="t72"><span class="label">Erfahrung</span>Bei Accenture Berlin habe ich Feedback- und Reporting-Abläufe für ein Team von sieben Personen automatisiert. Den KI-Coach unten habe ich selbst gebaut.</p>
           </li>
         </ul>
-        <p class="offer__law">Übrigens: Seit Februar 2025 verlangt der EU AI Act von Unternehmen, die KI einsetzen, dass ihre Mitarbeitenden über ausreichende KI-Kompetenz verfügen (Artikel 4).</p>
+        <p class="offer__law" data-i18n="t73">Übrigens: Seit Februar 2025 verlangt der EU AI Act von Unternehmen, die KI einsetzen, dass ihre Mitarbeitenden über ausreichende KI-Kompetenz verfügen (Artikel 4).</p>
       </div>
       <div class="build-note">
-        <p class="label">Was ich selbst baue</p>
-        <p><strong>Clueless Consultant Coach:</strong> ein KI-Coach, an dem junge Beraterinnen und Berater Kundenfälle üben. Er widerspricht zuerst und lobt danach.</p>
-        <a class="link-out" href="https://clueless-consultant.streamlit.app/">Coach öffnen</a>
-        <p class="small">Die App braucht beim ersten Öffnen einen Moment zum Aufwachen.</p>
+        <p class="label" data-i18n="t74">Was ich selbst baue</p>
+        <p data-i18n="t75"><strong>Clueless Consultant Coach:</strong> ein KI-Coach, an dem junge Beraterinnen und Berater Kundenfälle üben. Er widerspricht zuerst und lobt danach.</p>
+        <a class="link-out" href="https://clueless-consultant.streamlit.app/" data-i18n="t76">Coach öffnen</a>
+        <p class="small" data-i18n="t77">Die App braucht beim ersten Öffnen einen Moment zum Aufwachen.</p>
       </div>
     </div>
   </section>
@@ -573,10 +598,10 @@
   <!-- KONTAKT: name, email, LinkedIn. Holds to the end. -->
   <section class="arrival page" id="kontakt" data-stop="6" aria-labelledby="kontakt-h">
     <div class="contact" data-sc-in data-sc-stagger="70">
-      <p class="label">Kontakt</p>
+      <p class="label" data-i18n="t7">Kontakt</p>
       <h2 class="contact__name" id="kontakt-h">Antony Shreyas</h2>
       <ul class="contact__links">
-        <li><span class="label">E-Mail</span><a href="mailto:antonyshreyas777@gmail.com">antonyshreyas777@gmail.com</a></li>
+        <li><span class="label" data-i18n="t78">E-Mail</span><a href="mailto:antonyshreyas777@gmail.com">antonyshreyas777@gmail.com</a></li>
         <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/antonyshreyasm">linkedin.com/in/antonyshreyasm</a></li>
       </ul>
     </div>
@@ -622,7 +647,7 @@
       grid.appendChild(path);
       var t = document.createElementNS(NS, 'text');
       t.setAttribute('class', 'land-label'); t.setAttribute('x', X(LAND[name].label[0])); t.setAttribute('y', Y(LAND[name].label[1]));
-      t.setAttribute('text-anchor', 'middle'); t.textContent = name.toUpperCase();
+      t.setAttribute('text-anchor', 'middle'); t.textContent = name.toUpperCase(); t.setAttribute('data-land', name);
       grid.appendChild(t);
     });
     [20, 40, 60].forEach(function (lat) {
@@ -645,6 +670,7 @@
     var DIST = 7130;
     flown.style.strokeDasharray = LEN + ' ' + LEN;
     var fmt = new Intl.NumberFormat('de-DE');
+    var LANDS_EN = { 'Indien': 'INDIA', 'Deutschland': 'GERMANY' };
 
     function pinP(el) {
       var travel = Math.max(el.offsetHeight - innerHeight, 1);
@@ -741,6 +767,46 @@
       portrait.style.setProperty('--my', my.toFixed(3));
       requestAnimationFrame(frame);
     }
+    /* ---- DE / EN ---- */
+    var EN = {"tx1": "€20,000", "tx2": "20%", "t0": "From Bangalore to <em>Berlin.</em>", "t1": "I started at Accenture in India, founded my own company and closed it again to study management in Germany. Today I work with AI every day. My goal: helping companies introduce AI, with AI skills for their teams and a change that brings people along.", "t2": "· 7,130 km", "t3": "Write an email", "t4": "Own company", "t5": "The flight", "t6": "Today", "t7": "Contact", "t8": "Bangalore · 2019 to 2023", "t9": "The bridge between three teams.", "t10": "Cloud Operations Associate at Accenture, October 2021 to January 2023", "t11": "Born in Bangalore. Bachelor of Engineering in Mechatronics in 2019, then my start at Accenture.", "t12": "I was the link between our clients’ business teams, their technical teams and my own technical team at Accenture. For more than ten clients, including E.ON, GSK and Whirlpool, I coordinated incidents and changes every day and made sure every side knew what was happening.", "t13": "client accounts, tracked every day", "t14": "new analysts onboarded and trained in processes and ServiceNow", "t15": "a critical outage at Whirlpool: on the call with senior leadership until it was resolved", "t16": "What I learned there: technology only runs smoothly when the people behind it talk to each other.", "t17": "Bangalore · February to August 2023", "t18": "My own company.", "t19": "Founder and project lead, Interiors and Home Solutions", "t20": "years my father had already spent in the interiors trade.", "t21": "I wanted my own firm. So I left Accenture and founded Interiors and Home Solutions, for interior fit-out and design.", "t22": "My clients had a newly built house with nothing but walls. I delivered all the woodwork a house needs before anyone can move in: the kitchen with its many cabinets, built-in wardrobes in the bedrooms, the TV cabinet and everything else in wood.", "t23": "Everything was on me: sourcing materials, hiring craftsmen and labourers, running the site, right down to the finishing touches. I won my first two clients myself and completed both houses through to handover.", "t24": "houses, from bare walls to move-in", "t25": "revenue in seven months", "t26": "profit margin, roughly", "t27": "Materials", "t28": "Craftsmen", "t29": "Labour", "t30": "Finishing", "t31": "KITCHEN", "t32": "LIVING", "t33": "TV CABINET", "t34": "BEDROOM", "t35": "WARDROBE", "t36": "Illustration · in blue: my woodwork", "t37": "I closed the <em>company.</em>", "t38": "While building it, I realised I had the technical side covered. <strong>But to really run a company, I was missing management.</strong> So I went where I wanted to learn it. My dream was called Germany.", "t39": "Departure from <em>Bangalore.</em>", "t40": "In my luggage: years at Accenture, my own company and one clear gap.", "t41": "Landing in <em>Berlin.</em> New country, new language, a Master’s in International Management.", "t42": "BLR · 12.97° N 77.59° E", "t43": "BER · 52.52° N 13.40° E", "t44": "Berlin · since September 2023", "t45": "The management I was missing.", "t46": "Hochschule Fresenius Berlin, completed 2026", "t47": "How organisations plan change and bring their people along.", "t48": "Leading across countries and cultures.", "t49": "What I had lived through in my firm, now with method.", "t50": "Planning, steering and properly documenting projects.", "t51": "My Master’s thesis on emotional and artificial intelligence in intercultural teams was published as a journal article in 2026. <a class=\"link-out\" href=\"https://doi.org/10.52398/gjsd.2026.v6.i1.pp150-170\">Read the article</a>", "t52": "Berlin · from 2024", "t53": "Working in Germany.", "t54": "Oct 2024 to Jan 2025", "t55": "My first job in Germany, in a German team. IT operations for 26 applications to BMW security standards: ordering components, issuing certificates, maintaining knowledge articles.", "t56": "Mar to Aug 2025", "t57": "Back at Accenture, this time as a Management Consulting Associate on a live SAP programme.", "t58": "Analyses and presentations for senior management meetings, Jira dashboards for the programme lead, and automated feedback and reporting workflows for a team of seven.", "t59": "Berlin · today", "t60": "Today I work with AI every day. And I see <em>what it does to teams.</em>", "t61": "When AI arrives in a team, the technology is rarely the problem. There is uncertainty and often real fear. The human side of adoption decides whether it works.", "t62": "That is exactly where I want to come in: guiding teams so they use AI without fear and work more productively. With an engineer’s eye and a founder’s experience.", "t63": "How I can support your company.", "t64": "Building AI literacy in your team", "t65": "I show your staff how to use AI tools like Claude safely and sensibly in their daily work, on their own tasks rather than textbook examples.", "t66": "<span class=\"label\">Experience</span>I work with AI every day, and at Accenture I onboarded and trained new analysts.", "t67": "Guiding adoption as a change", "t68": "I take uncertainty and fear seriously before they turn into resistance: explaining clearly what changes, making room for questions, bringing people along.", "t69": "<span class=\"label\">Experience</span>Master’s including Managing Transformation &amp; Change, plus a thesis and journal article on psychological safety and AI tools in teams.", "t70": "Simplifying workflows with AI", "t71": "I find the recurring tasks that cost your team time and build simple solutions for them. That is how AI makes daily work noticeably more productive.", "t72": "<span class=\"label\">Experience</span>At Accenture Berlin I automated feedback and reporting workflows for a team of seven. I built the AI coach below myself.", "t73": "By the way: since February 2025, the EU AI Act requires companies that use AI to ensure their staff have sufficient AI literacy (Article 4).", "t74": "What I build myself", "t75": "<strong>Clueless Consultant Coach:</strong> an AI coach where junior consultants practise client cases. It challenges first and praises after.", "t76": "Open the coach", "t77": "The app needs a moment to wake up the first time you open it.", "t78": "Email", "a0": "Stops", "a1": "From Bangalore to Berlin, about 7,130 kilometres", "a2": "Portrait of Antony Shreyas", "a3": "What I was responsible for", "a4": "Illustration: floor plan of a house. Highlighted is the woodwork: kitchen cabinets, built-in wardrobes in two bedrooms and a TV cabinet.", "a5": "Flight route from Bangalore to Berlin, about 7,130 kilometres"};
+    var DE = {};
+    var texts = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+    texts.forEach(function (el) { DE[el.getAttribute('data-i18n')] = el.innerHTML; });
+    var ATTR_NAMES = ['aria-label', 'alt'];
+    var attrEls = [];
+    ATTR_NAMES.forEach(function (n) {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-' + n + ']'), function (el) {
+        var k = el.getAttribute('data-i18n-' + n);
+        DE[k] = el.getAttribute(n);
+        attrEls.push({ el: el, name: n, key: k });
+      });
+    });
+    var TITLE = { de: document.title, en: 'Antony Shreyas · From Bangalore to Berlin' };
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.lang button'));
+    function setLang(lang, remember) {
+      var dict = lang === 'en' ? EN : DE;
+      texts.forEach(function (el) { var k = el.getAttribute('data-i18n'); if (dict[k] != null) el.innerHTML = dict[k]; });
+      attrEls.forEach(function (a) { if (dict[a.key] != null) a.el.setAttribute(a.name, dict[a.key]); });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-land]'), function (t) {
+        var n = t.getAttribute('data-land'); t.textContent = lang === 'en' ? LANDS_EN[n] : n.toUpperCase();
+      });
+      root.setAttribute('lang', lang);
+      document.title = TITLE[lang];
+      fmt = new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'de-DE');
+      lastT = -1; lastIdx = -1;
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+      // text length changed the layout: let the engine re-measure its acts
+      dispatchEvent(new Event('resize'));
+      if (remember) {
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+        try { var u = new URL(location.href); if (lang === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang'); history.replaceState(null, '', u); } catch (e) {}
+      }
+    }
+    buttons.forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang'), true); }); });
+    var start = 'de';
+    try { var q = new URL(location.href).searchParams.get('lang'); if (q === 'en' || q === 'de') start = q; else if (localStorage.getItem('lang') === 'en') start = 'en'; } catch (e) {}
+    if (start === 'en') setLang('en', false);
+
     requestAnimationFrame(frame);
   })();
 </script>
