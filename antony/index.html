@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Antony Shreyas · Von Bangalore nach Berlin</title>
+<meta name="description" content="Antony Shreyas: von Accenture in Bangalore über ein eigenes Unternehmen zum Master in International Management in Berlin. Heute arbeitet er jeden Tag mit KI und hilft Teams, sie ohne Angst einzuführen.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230F1F3D'/><path d='M6 24 Q14 6 26 8' fill='none' stroke='%238FB4FF' stroke-width='2.4' stroke-linecap='round'/><circle cx='6' cy='24' r='2.6' fill='%23FFFFFF'/><circle cx='26' cy='8' r='2.6' fill='%23FFFFFF'/></svg>">
+<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  @font-face { font-family: "Newsreader"; font-style: normal; font-weight: 400 500; font-display: swap; src: url(assets/fonts/newsreader.woff2) format("woff2"); }
+  @font-face { font-family: "Newsreader"; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/newsreader-italic.woff2) format("woff2"); }
+  @font-face { font-family: "Public Sans"; font-style: normal; font-weight: 400 600; font-display: swap; src: url(assets/fonts/publicsans.woff2) format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/plexmono-400.woff2) format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/plexmono-500.woff2) format("woff2"); }
+  :root {
+    --sc-canvas:     #FFFFFF;
+    --sc-surface:    #F1F4F9;
+    --sc-ink:        #0F1F3D;
+    --sc-ink-soft:   #4A5670;
+    --sc-accent:     #1D3F8F;
+    --sc-accent-ink: #FFFFFF;
+    --sc-font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --sc-font-text:    "Public Sans", "Segoe UI", system-ui, sans-serif;
+
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    --night: #0F1F3D;
+    --night-ink: #FFFFFF;
+    --night-soft: #B4C2DA;
+    --night-accent: #8FB4FF;
+    --hair: #DCE2EC;
+    --rail-w: 12.5rem;
+  }
+
+  body { background: var(--sc-canvas); color: var(--sc-ink); }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  a { text-underline-offset: .22em; text-decoration-thickness: 1px; color: inherit; }
+  :focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 4px; border-radius: 2px; }
+  .night :focus-visible { outline-color: var(--night-accent); }
+
+  .label {
+    font-family: var(--mono); font-size: var(--sc-t-xs); font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--sc-ink-soft); margin: 0;
+  }
+  .night .label { color: var(--night-soft); }
+
+  .cta {
+    display: inline-flex; align-items: center; gap: .6rem; justify-self: start;
+    font-family: var(--sc-font-text); font-weight: 600; font-size: var(--sc-t-base);
+    padding: .85rem 1.35rem; border-radius: 2px; text-decoration: none; white-space: nowrap;
+    background: var(--sc-accent); color: var(--sc-accent-ink);
+    box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 6px 18px -8px rgba(15,31,61,.45);
+    transition: transform 140ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .cta:hover { background: #15306E; } }
+  .cta:active { transform: translateY(1px) scale(.98); }
+  .link-out { font-weight: 600; text-decoration: underline; }
+
+  main { position: relative; z-index: 1; }
+  .page { padding-left: var(--rail-w); padding-right: var(--sc-gutter); }
+  .page > * { max-width: 72rem; }
+
+  /* ------------------------------------------------------- route rail (nav) -- */
+  .rail {
+    position: fixed; z-index: 50; left: 0; top: 0; bottom: 0; width: var(--rail-w);
+    pointer-events: none; color: var(--sc-ink-soft);
+    transition: color 240ms var(--sc-ease-out);
+  }
+  .rail__track { position: absolute; left: 2.25rem; top: 14vh; bottom: 14vh; width: 0; }
+  .rail__track::before { content: ""; position: absolute; top: 0; bottom: 0; left: -.5px; border-left: 1px dashed currentColor; opacity: .55; }
+  .rail__done { position: absolute; top: 0; left: -1px; width: 2px; background: var(--sc-accent); height: calc(var(--rail-p, 0) * 100%); }
+  .rail ol { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+  .rail li { position: absolute; left: 0; transform: translateY(-50%); }
+  .rail a {
+    pointer-events: auto; display: flex; align-items: center; gap: .85rem; text-decoration: none;
+    font-family: var(--mono); font-size: var(--sc-t-xs); letter-spacing: .08em; text-transform: uppercase;
+    padding: .4rem .5rem .4rem 0; margin-left: -5px; color: inherit; white-space: nowrap;
+  }
+  .rail a::before {
+    content: ""; width: 9px; height: 9px; border-radius: 50%; flex: none;
+    background: var(--sc-canvas); border: 1.5px solid currentColor; box-sizing: border-box;
+    transition: background-color 200ms var(--sc-ease-out), border-color 200ms var(--sc-ease-out);
+  }
+  .rail a.is-past::before { background: var(--sc-accent); border-color: var(--sc-accent); }
+  .rail a.is-here { color: var(--sc-ink); font-weight: 500; }
+  .rail__plane {
+    position: absolute; left: 0; top: calc(var(--rail-p, 0) * 100%); width: 22px; height: 22px;
+    margin: -11px 0 0 -11px; color: var(--sc-accent); transform: rotate(90deg);
+  }
+  .rail__plane svg { width: 100%; height: 100%; display: block; }
+  html.is-night .rail { color: var(--night-soft); }
+  html.is-night .rail a::before { background: var(--night); }
+  html.is-night .rail a.is-past::before { background: var(--night-accent); border-color: var(--night-accent); }
+  html.is-night .rail a.is-here { color: var(--night-ink); }
+  html.is-night .rail__done, html.is-night .rail__plane { background-color: transparent; }
+  html.is-night .rail__done { background: var(--night-accent); }
+  html.is-night .rail__plane { color: var(--night-accent); }
+
+  /* ------------------------------------------------------------------ hero -- */
+  .hero { min-height: 100svh; display: grid; align-items: center; padding-block: 4rem; }
+  .hero__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: var(--sc-8); align-items: center; }
+  .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
+  .hero h1 {
+    font-family: var(--sc-font-display); font-weight: 400; margin: 0;
+    font-size: clamp(3.2rem, 7.4vw, 7rem); line-height: .95; letter-spacing: -.025em;
+  }
+  .hero h1 em { font-style: italic; color: var(--sc-accent); }
+  .hero__lede { font-size: var(--sc-t-lg); line-height: 1.55; max-width: 34ch; margin: 0; text-wrap: pretty; }
+  .ticket {
+    display: flex; align-items: center; gap: .9rem; font-family: var(--mono); font-size: var(--sc-t-sm);
+    letter-spacing: .06em; color: var(--sc-ink-soft);
+  }
+  .ticket b { color: var(--sc-ink); font-weight: 500; }
+  .ticket__line { width: 7rem; height: 1px; border-top: 1px dashed currentColor; position: relative; }
+  .ticket__line svg { position: absolute; left: 50%; top: -9px; width: 18px; height: 18px; margin-left: -9px; color: var(--sc-accent); background: var(--sc-canvas); }
+
+  .portrait { position: relative; justify-self: center; width: min(100%, 30rem); aspect-ratio: 4 / 5; clip-path: inset(-40% -20% 0 -20%); }
+  .portrait__plate { position: absolute; inset: 16% 0 0 0; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(15,31,61,.45); }
+  .portrait__plate img { position: absolute; left: 0; width: 100%; height: 119.05%; top: -19.05%; max-width: none; object-fit: cover; transform: scale(1.06); transform-origin: 50% 30%; }
+  .portrait__subject { position: absolute; inset: 0; }
+  .portrait__subject img { width: 100%; height: 100%; max-width: none; object-fit: cover; display: block; }
+  .portrait__plate, .portrait__subject { will-change: transform; }
+  .portrait__subject { translate: calc(var(--mx, 0) * -6px) calc(var(--my, 0) * -4px); }
+  .portrait__plate { translate: calc(var(--mx, 0) * 10px) calc(var(--my, 0) * 6px); }
+
+  /* ------------------------------------------------------------- chapters -- */
+  .stop { padding-block: calc(var(--sc-section) * .75); border-top: 1px solid var(--hair); }
+  .stop__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sc-6) var(--sc-9); align-items: start; }
+  .stop__head { display: grid; gap: var(--sc-3); position: sticky; top: 18vh; }
+  .stop h2 {
+    font-family: var(--sc-font-display); font-weight: 400; margin: 0;
+    font-size: var(--sc-t-3xl); line-height: 1.02; letter-spacing: -.02em; text-wrap: balance;
+  }
+  .stop .sub { font-family: var(--sc-font-display); font-weight: 400; margin: 0; font-size: var(--sc-t-2xl); line-height: 1.05; letter-spacing: -.015em; }
+  .stop__role { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); margin: 0; }
+  .stop__body { display: grid; gap: var(--sc-5); }
+  .stop__body p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.6; max-width: 38em; text-wrap: pretty; }
+  .stop__body p.small { font-size: var(--sc-t-base); color: var(--sc-ink-soft); }
+  .lesson {
+    font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-xl); line-height: 1.35;
+    margin: 0; padding-left: var(--sc-5); border-left: 2px solid var(--sc-accent); max-width: 30ch; text-wrap: balance;
+  }
+
+  .facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); }
+  .facts li { display: grid; gap: var(--sc-2); align-content: start; padding-top: var(--sc-4); border-top: 1px solid var(--hair); }
+  .facts b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .facts li > span { font-size: var(--sc-t-sm); line-height: 1.5; color: var(--sc-ink-soft); }
+
+  /* firm */
+  .years { display: flex; align-items: baseline; gap: var(--sc-4); margin: 0; }
+  .years b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-4xl); line-height: .9; letter-spacing: -.03em; color: var(--sc-accent); font-variant-numeric: tabular-nums; }
+  .years > span { font-family: var(--sc-font-display); font-size: var(--sc-t-lg); line-height: 1.3; max-width: 16ch; }
+  .chain { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sc-2) 0; font-family: var(--mono); font-size: var(--sc-t-xs); letter-spacing: .08em; text-transform: uppercase; }
+  .chain li { display: flex; align-items: center; }
+  .chain li + li::before { content: ""; width: 1.6rem; border-top: 1px solid var(--sc-accent); margin-inline: .6rem; }
+
+  .logo { display: block; height: 26px; width: auto; max-width: none; }
+  .logo--hsf { height: 30px; margin-bottom: var(--sc-2); }
+  .logo--ccv { height: 52px; }
+  .stop__head .logo { margin-top: var(--sc-3); }
+  .job__when .logo { flex: none; }
+
+  .plan { margin: var(--sc-3) 0 0; display: grid; gap: var(--sc-3); padding: var(--sc-5); background: var(--sc-surface); border-radius: 2px; }
+  .plan svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .plan path, .plan circle { fill: none; stroke: var(--sc-ink); stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+  .plan__walls path { stroke-width: 7; transition: stroke-dashoffset 1400ms var(--sc-ease-out); }
+  .plan__furniture path, .plan__furniture circle { stroke-width: 1.6; stroke: var(--sc-accent); transition: stroke-dashoffset 1200ms var(--sc-ease-out) 900ms; }
+  .plan__furniture .plan__rug { stroke-dasharray: 1 1; stroke-width: 1; opacity: .5; }
+  .plan__dim path { stroke-width: 1; stroke: var(--sc-ink-soft); transition: stroke-dashoffset 800ms var(--sc-ease-out) 1600ms; }
+  .plan text { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; fill: var(--sc-ink-soft); opacity: 0; transition: opacity 600ms var(--sc-ease-out) 1900ms; }
+  .plan.sc-in path, .plan.sc-in circle { stroke-dashoffset: 0; }
+  .plan.sc-in text { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .plan path, .plan circle { stroke-dashoffset: 0; transition: none; }
+    .plan text { opacity: 1; transition: none; }
+  }
+
+  /* the decision: a wipe from paper into night */
+  .decision { background: var(--night); color: var(--night-ink); }
+  .decision__in { padding-block: calc(var(--sc-section) * .9) calc(var(--sc-section) * .5); display: grid; gap: var(--sc-5); justify-items: start; }
+  .decision h2 {
+    font-family: var(--sc-font-display); font-weight: 400; margin: 0;
+    font-size: var(--sc-t-4xl); line-height: .98; letter-spacing: -.03em; max-width: 14ch; text-wrap: balance;
+  }
+  .decision h2 em { font-style: italic; color: var(--night-accent); }
+  .decision p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.6; max-width: 40ch; color: var(--night-soft); text-wrap: pretty; }
+  .decision p strong { color: var(--night-ink); font-weight: 500; }
+
+  /* ---------------------------------------------- the flight (signature) -- */
+  .flight { background: var(--night); color: var(--night-ink); }
+  .flight [data-sc-stage] { display: grid; }
+  .flight__frame {
+    height: 100%; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--sc-7);
+    align-items: center; padding-block: 8vh;
+  }
+  .flight__copy { display: grid; gap: var(--sc-6); align-content: center; }
+  .readout { display: grid; gap: var(--sc-2); font-family: var(--mono); }
+  .readout__route { font-size: var(--sc-t-sm); letter-spacing: .12em; color: var(--night-soft); }
+  .readout__km { font-family: var(--sc-font-display); font-size: var(--sc-t-4xl); line-height: 1; letter-spacing: -.02em; color: var(--night-ink); font-variant-numeric: tabular-nums; }
+  .readout__km small { font-family: var(--mono); font-size: var(--sc-t-sm); letter-spacing: .1em; color: var(--night-soft); margin-left: .4em; }
+  .lines { display: grid; }
+  .lines > p { grid-area: 1 / 1; margin: 0; font-family: var(--sc-font-display); font-size: var(--sc-t-xl); line-height: 1.25; letter-spacing: -.01em; max-width: 21ch; text-wrap: balance; }
+  .lines em { font-style: italic; color: var(--night-accent); }
+
+  .chart { width: 100%; height: auto; max-height: 78vh; display: block; overflow: visible; }
+  .chart .grid-dot { fill: rgba(255,255,255,.16); }
+  .chart .land { fill: rgba(255,255,255,.07); stroke: rgba(255,255,255,.32); stroke-width: 1.2; stroke-linejoin: round; }
+  .chart .land-label { fill: rgba(180,194,218,.75); font-family: var(--mono); font-size: 12px; letter-spacing: .2em; }
+  .chart .lat { stroke: rgba(255,255,255,.08); stroke-width: 1; }
+  .chart .lat-label { fill: rgba(180,194,218,.7); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; }
+  .chart .route-plan { fill: none; stroke: rgba(255,255,255,.28); stroke-width: 1.5; stroke-dasharray: 2 7; stroke-linecap: round; }
+  .chart .route-flown { fill: none; stroke: var(--night-accent); stroke-width: 2.5; stroke-linecap: round; }
+  .chart .city circle.core { fill: var(--night-ink); }
+  .chart .city circle.halo { fill: none; stroke: var(--night-accent); stroke-width: 1.5; opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .chart .city text { fill: var(--night-ink); font-family: var(--sc-font-display); font-size: 30px; }
+  .chart .city text.code { fill: var(--night-soft); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; }
+  .chart .plane { color: var(--night-ink); }
+  .chart .plane path { fill: currentColor; }
+
+  /* ------------------------------------------------------------- berlin -- */
+  .stop--berlin { border-top: 0; padding-top: calc(var(--sc-section) * .45); }
+  .degree { display: grid; gap: var(--sc-2); padding: var(--sc-5) 0; border-block: 1px solid var(--hair); }
+  .degree b { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1.1; }
+  .degree span { font-size: var(--sc-t-base); color: var(--sc-ink-soft); }
+  .modules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sc-5) var(--sc-6); }
+  .modules li { display: grid; gap: var(--sc-1); align-content: start; }
+  .modules .label { color: var(--sc-accent); }
+  .modules span:not(.label) { font-family: var(--sc-font-display); font-size: var(--sc-t-lg); line-height: 1.35; }
+
+  .jobs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-6); }
+  .job { display: grid; grid-template-columns: 1fr; gap: var(--sc-3); padding-top: var(--sc-5); border-top: 1px solid var(--hair); }
+  .job h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-xl); line-height: 1.15; }
+  .job__when { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sc-2) var(--sc-5); }
+  .job p { margin: 0; font-size: var(--sc-t-base); line-height: 1.6; max-width: 40em; }
+  .job p + p { margin-top: var(--sc-3); }
+
+  /* --------------------------------------------------------------- today -- */
+  .today { padding-block: calc(var(--sc-section) * .9); border-top: 1px solid var(--hair); }
+  .today__in { display: grid; gap: var(--sc-6); max-width: 54rem; margin-inline: auto; }
+  .today h2 { font-family: var(--sc-font-display); font-weight: 400; margin: 0; font-size: var(--sc-t-3xl); line-height: 1.02; letter-spacing: -.03em; text-wrap: balance; }
+  .today h2 em { font-style: italic; color: var(--sc-accent); }
+  .today__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-6); }
+  .today__cols p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.6; text-wrap: pretty; }
+  .today__in { max-width: 72rem; }
+  .offer { display: grid; gap: var(--sc-6); margin-top: var(--sc-6); padding-top: var(--sc-7); border-top: 1px solid var(--hair); }
+  .offer__h { font-family: var(--sc-font-display); font-weight: 400; margin: 0; font-size: var(--sc-t-2xl); line-height: 1.1; letter-spacing: -.015em; max-width: 22ch; }
+  .offer__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-6); }
+  .offer__list li { display: grid; gap: var(--sc-3); align-content: start; padding-top: var(--sc-5); border-top: 2px solid var(--sc-accent); }
+  .offer__list h4 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-xl); line-height: 1.2; color: var(--sc-ink); }
+  .offer__list p { margin: 0; font-size: var(--sc-t-base); line-height: 1.6; }
+  .offer__list .offer__proof { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); display: grid; gap: var(--sc-1); }
+  .offer__proof .label { color: var(--sc-accent); }
+  .offer__law { margin: 0; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 60ch; padding-left: var(--sc-4); border-left: 2px solid var(--hair); }
+  .build-note { display: grid; gap: var(--sc-3); padding: var(--sc-5) var(--sc-6); background: var(--sc-surface); border-radius: 2px; justify-items: start; }
+  .build-note p { margin: 0; font-size: var(--sc-t-base); line-height: 1.55; max-width: 52ch; }
+  .build-note p.small { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+
+  /* --------------------------------------------------------- arrival close -- */
+  .arrival { min-height: 100svh; display: grid; align-content: center; padding-block: 6rem 5rem; border-top: 1px solid var(--hair); }
+  .contact { display: grid; gap: var(--sc-5); justify-items: start; }
+  .contact__name { font-family: var(--sc-font-display); font-weight: 400; margin: 0; font-size: clamp(3rem, 8vw, 7.5rem); line-height: .95; letter-spacing: -.03em; }
+  .contact__links { list-style: none; margin: var(--sc-4) 0 0; padding: 0; display: grid; gap: var(--sc-4); border-top: 1px solid var(--hair); padding-top: var(--sc-5); min-width: min(100%, 34rem); }
+  .contact__links li { display: grid; grid-template-columns: 7rem 1fr; align-items: baseline; gap: var(--sc-4); }
+  .contact__links a { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); color: var(--sc-accent); text-decoration: underline; overflow-wrap: anywhere; }
+  .foot { margin-top: var(--sc-7); }
+
+  /* ---------------------------------------------------------------- mobile -- */
+  @media (max-width: 860px) {
+    :root { --rail-w: 0px; }
+    .page { padding-left: var(--sc-gutter); }
+    .rail { top: 0; bottom: auto; width: 100%; height: calc(env(safe-area-inset-top, 0px) + 2.75rem); background: color-mix(in oklab, var(--sc-canvas) 94%, transparent); border-bottom: 1px solid var(--hair); }
+    html.is-night .rail { background: color-mix(in oklab, var(--night) 94%, transparent); border-color: rgba(255,255,255,.12); }
+    .rail__track { top: auto; bottom: 1.375rem; left: calc(var(--sc-gutter) + 7.5rem); right: var(--sc-gutter); width: auto; height: 0; }
+    .rail__track::before { top: -.5px; bottom: auto; left: 0; right: 0; border-left: 0; border-top: 1px dashed currentColor; }
+    .rail__done { top: -1px; left: 0; width: calc(var(--rail-p, 0) * 100%); height: 2px; }
+    .rail li { top: 0 !important; transform: translate(-50%, -50%); }
+    .rail a { padding: .6rem .35rem; margin: 0; gap: 0; }
+    .rail a span { display: none; }
+    .rail__plane { top: 0; left: calc(var(--rail-p, 0) * 100%); transform: none; width: 18px; height: 18px; margin: -9px 0 0 -9px; }
+
+    .hero { padding-top: calc(env(safe-area-inset-top, 0px) + 4.25rem); padding-bottom: var(--sc-7); align-items: start; }
+    .hero__grid { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .portrait { order: -1; width: min(78%, 20rem); }
+    .hero__lede { font-size: var(--sc-t-base); }
+
+    .stop__grid, .job, .today__cols, .offer__list { grid-template-columns: 1fr; }
+    .stop__head { position: static; }
+    .stop h2 { font-size: var(--sc-t-2xl); }
+    .stop__body p { font-size: var(--sc-t-base); }
+    .facts { grid-template-columns: 1fr; gap: var(--sc-3); }
+    .facts li { grid-template-columns: 4.5rem 1fr; align-items: baseline; }
+    .modules { grid-template-columns: 1fr; }
+    .decision h2 { font-size: var(--sc-t-3xl); }
+    .today h2 { font-size: var(--sc-t-2xl); }
+    .decision p, .today__cols p { font-size: var(--sc-t-base); }
+
+    .flight__frame { grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: var(--sc-5); padding-block: calc(env(safe-area-inset-top, 0px) + 4rem) 4vh; align-content: center; }
+    .flight__copy { display: contents; }
+    .readout { order: 1; }
+    .chart-wrap { order: 2; }
+    .lines { order: 3; min-height: 6.5em; }
+    .readout__km { font-size: var(--sc-t-3xl); }
+    .lines > p { font-size: var(--sc-t-lg); }
+    .chart .city text { font-size: 40px; }
+    .chart .city text.code { font-size: 18px; }
+    .chart .lat-label, .chart .city text.code { display: none; }
+
+    .arrival { min-height: 80svh; padding-block: var(--sc-8); }
+    .contact__links li { grid-template-columns: 1fr; gap: var(--sc-1); }
+    .contact__links a { font-size: var(--sc-t-lg); }
+  }
+  .rail__now { position: absolute; left: var(--sc-gutter); bottom: .85rem; font-family: var(--mono); font-size: var(--sc-t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--sc-ink); }
+  html.is-night .rail__now { color: var(--night-ink); }
+  @media (min-width: 861px) { .rail__now { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portrait__plate, .portrait__subject { translate: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Stationen">
+  <span class="rail__now" aria-hidden="true">Start</span>
+  <div class="rail__track">
+    <div class="rail__done"></div>
+    <ol>
+      <li><a href="#start"><span>Start</span></a></li>
+      <li><a href="#bangalore"><span>Bangalore</span></a></li>
+      <li><a href="#firma"><span>Eigene Firma</span></a></li>
+      <li><a href="#flug"><span>Der Flug</span></a></li>
+      <li><a href="#berlin"><span>Berlin</span></a></li>
+      <li><a href="#heute"><span>Heute</span></a></li>
+      <li><a href="#kontakt"><span>Kontakt</span></a></li>
+    </ol>
+    <div class="rail__plane" aria-hidden="true"><svg viewBox="-16 -16 32 32"><use href="#plane"/></svg></div>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="plane" d="M15 0 C15 -1.4 13.6 -2 12 -2 L4 -2 L-3 -12 L-6.5 -12 L-2.5 -2 L-9 -2 L-12 -6 L-14.5 -6 L-12.5 0 L-14.5 6 L-12 6 L-9 2 L-2.5 2 L-6.5 12 L-3 12 L4 2 L12 2 C13.6 2 15 1.4 15 0 Z" fill="currentColor"/>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- START: departure. Title page, layered portrait -->
+  <section class="hero page" id="start" data-sc-act="flow" data-stop="0">
+    <div class="hero__grid">
+      <div class="hero__copy" data-sc-in data-sc-stagger="70">
+        <p class="label">Antony Mervyn Shreyas · Berlin</p>
+        <h1>Von Bangalore nach <em>Berlin.</em></h1>
+        <p class="hero__lede">Ich habe bei Accenture in Indien angefangen, ein eigenes Unternehmen gegründet und es wieder geschlossen, um in Deutschland Management zu studieren. Heute arbeite ich jeden Tag mit KI. Mein Ziel: Unternehmen helfen, KI einzuführen, mit KI-Kompetenz für ihre Teams und einer Veränderung, die die Menschen mitnimmt.</p>
+        <p class="ticket" aria-label="Von Bangalore nach Berlin, rund 7.130 Kilometer"><b>BLR</b><span class="ticket__line"><svg viewBox="-16 -16 32 32" aria-hidden="true"><use href="#plane"/></svg></span><b>BER</b><span>· 7.130 km</span></p>
+        <a class="cta" href="mailto:antonyshreyas777@gmail.com?subject=Gespr%C3%A4ch">E-Mail schreiben</a>
+      </div>
+      <div class="portrait" id="portrait">
+        <div class="portrait__plate" data-sc-parallax="-0.9"><img src="assets/plate.webp" width="1200" height="1500" alt=""></div>
+        <div class="portrait__subject" data-sc-parallax="0.35"><img src="assets/subject.webp" width="1200" height="1500" alt="Porträt von Antony Shreyas"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANGALORE: Accenture, the bridge -->
+  <section class="stop page" id="bangalore" data-stop="1" aria-labelledby="bangalore-h">
+    <div class="stop__grid">
+      <div class="stop__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Bangalore · 2019 bis 2023</p>
+        <h2 id="bangalore-h">Die Brücke zwischen drei Teams.</h2>
+        <p class="stop__role">Cloud Operations Associate bei Accenture, Oktober 2021 bis Januar 2023</p>
+        <img class="logo logo--accenture" src="assets/logos/accenture.svg" width="163" height="43" alt="Accenture">
+      </div>
+      <div class="stop__body" data-sc-in data-sc-stagger="70">
+        <p class="small">Geboren in Bangalore. 2019 Bachelor of Engineering in Mechatronik, danach der Einstieg bei Accenture.</p>
+        <p>Ich war das Bindeglied zwischen den Fachteams unserer Kunden, ihren Technikteams und meinem eigenen Technikteam bei Accenture. Für mehr als zehn Kunden, darunter E.ON, GSK und Whirlpool, habe ich jeden Tag Störungen und Änderungen koordiniert und dafür gesorgt, dass alle Seiten wussten, was gerade passiert.</p>
+        <ul class="facts">
+          <li><b><span data-sc-count="0 10">10</span>+</b><span>Kundenkonten, jeden Tag im Blick</span></li>
+          <li><b><span data-sc-count="0 3">3</span></b><span>neue Analysten eingearbeitet und in Prozesse und ServiceNow geschult</span></li>
+          <li><b>P1</b><span>ein kritischer Ausfall bei Whirlpool: mit der Führungsebene im Call, bis zur Lösung</span></li>
+        </ul>
+        <p class="lesson">Dort habe ich gelernt: Technik läuft erst rund, wenn die Menschen dahinter miteinander reden.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIRMA: his father's trade, his own firm -->
+  <section class="stop page" id="firma" data-stop="2" aria-labelledby="firma-h">
+    <div class="stop__grid">
+      <div class="stop__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Bangalore · Februar bis August 2023</p>
+        <h2 id="firma-h">Mein eigenes Unternehmen.</h2>
+        <p class="stop__role">Gründer und Projektleiter, Interiors and Home Solutions</p>
+      </div>
+      <div class="stop__body" data-sc-in data-sc-stagger="70">
+        <p class="years"><b><span data-sc-count="0 25" data-sc-count-ms="1600">25</span></b><span>Jahre war mein Vater da schon im Innenausbau.</span></p>
+        <p>Ich wollte meine eigene Firma. Also habe ich Accenture verlassen und Interiors and Home Solutions gegründet, für Innenausbau und Interior Design.</p>
+        <p>Alles lag bei mir: Material beschaffen, Handwerker und Arbeiter beauftragen, die Baustelle führen, bis zum letzten Schliff. Die ersten zwei Kunden habe ich selbst gewonnen und beide Projekte bis zur Abnahme geliefert.</p>
+        <ol class="chain" aria-label="Was ich verantwortet habe">
+          <li>Material</li><li>Handwerker</li><li>Arbeiter</li><li>Fertigstellung</li>
+        </ol>
+        <figure class="plan" data-sc-in>
+          <svg viewBox="0 0 600 420" role="img" aria-label="Illustration: Grundriss einer Wohnung mit Wohnbereich, Küche und Schlafzimmer">
+            <g class="plan__dim">
+              <path pathLength="1" d="M20 14 H580 M20 8 V20 M580 8 V20"/>
+              <text x="300" y="8" text-anchor="middle">8,40 m</text>
+            </g>
+            <g class="plan__walls">
+              <path pathLength="1" d="M260 400 H20 V30 H580 V400 H320"/>
+              <path pathLength="1" d="M370 30 V150 M370 205 V230 H580"/>
+            </g>
+            <g class="plan__furniture">
+              <path pathLength="1" d="M420 60 h130 v140 h-130 Z"/>
+              <path pathLength="1" d="M430 70 h50 v26 h-50 Z M490 70 h50 v26 h-50 Z"/>
+              <path pathLength="1" d="M420 130 h130"/>
+              <path pathLength="1" d="M60 300 h220 v60 h-220 Z M60 300 v-22 h22 v22 M258 300 v-22 h22 v22"/>
+              <path pathLength="1" d="M70 150 h200 v110 h-200 Z" class="plan__rug"/>
+              <circle pathLength="1" cx="170" cy="205" r="26"/>
+              <path pathLength="1" d="M300 70 h46 v46 h-46 Z"/>
+              <path pathLength="1" d="M390 390 H560 V250"/>
+              <path pathLength="1" d="M420 290 h100 v40 h-100 Z"/>
+              <circle pathLength="1" cx="45" cy="55" r="12"/>
+            </g>
+            <g class="plan__labels">
+              <text x="170" y="120" text-anchor="middle">WOHNEN</text>
+              <text x="485" y="222" text-anchor="middle">SCHLAFEN</text>
+              <text x="470" y="355" text-anchor="middle">KÜCHE</text>
+            </g>
+          </svg>
+          <figcaption class="label">Illustration · Grundriss einer Wohnung</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE DECISION: wipe from paper into night -->
+  <section class="decision" data-sc-act="flow" data-night aria-labelledby="decision-h">
+    <div class="page">
+      <div class="decision__in" data-sc-reveal="up" data-sc-reveal-at="0.04 0.38">
+        <p class="label">August 2023</p>
+        <h2 id="decision-h">Ich habe die Firma <em>geschlossen.</em></h2>
+        <p>Beim Aufbau habe ich gemerkt: Die technische Seite kann ich. <strong>Aber um ein Unternehmen wirklich zu führen, fehlte mir das Management.</strong> Also bin ich dorthin gegangen, wo ich es lernen wollte. Mein Traum hieß Deutschland.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FLIGHT (peak): the reader flies the route -->
+  <section class="flight" id="flug" data-stop="3" data-night data-sc-act="pin" data-sc-span="3.2" aria-labelledby="flight-h">
+    <div data-sc-stage>
+      <div class="flight__frame page">
+        <div class="flight__copy">
+          <div class="readout" data-sc-cue="0 1 0 0">
+            <h2 class="readout__route" id="flight-h">BLR → BER · September 2023</h2>
+            <p class="readout__km" style="margin:0"><span id="km">0</span><small>km</small></p>
+          </div>
+          <div class="lines">
+            <p data-sc-cue="0 0.4 0 0.25">Abflug in <em>Bangalore.</em></p>
+            <p data-sc-cue="0.36 0.72 0.25 0.25">Im Gepäck: Jahre bei Accenture, ein eigenes Unternehmen und eine klare Lücke.</p>
+            <p data-sc-cue="0.7 1 0.2 0.04">Landung in <em>Berlin.</em> Neues Land, neue Sprache, ein Master in International Management.</p>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg class="chart" id="chart" viewBox="0 0 1060 640" role="img" aria-label="Flugroute von Bangalore nach Berlin, rund 7.130 Kilometer">
+            <g id="grid"></g>
+            <path id="route-plan" class="route-plan" d="M 826 548 Q 650 70 184 132"/>
+            <path id="route-flown" class="route-flown" d="M 826 548 Q 650 70 184 132"/>
+            <g class="city" id="city-blr">
+              <circle class="halo" cx="826" cy="548" r="16"/>
+              <circle class="core" cx="826" cy="548" r="6"/>
+              <text x="850" y="560">Bangalore</text>
+              <text class="code" x="852" y="584">BLR · 12,97° N 77,59° O</text>
+            </g>
+            <g class="city" id="city-ber">
+              <circle class="halo" cx="184" cy="132" r="16"/>
+              <circle class="core" cx="184" cy="132" r="6"/>
+              <text x="208" y="120">Berlin</text>
+              <text class="code" x="210" y="146">BER · 52,52° N 13,40° O</text>
+            </g>
+            <g id="plane-g" class="plane"><use href="#plane" transform="scale(1.9)"/></g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERLIN: the degree that filled the gap, then work -->
+  <section class="stop stop--berlin page" id="berlin" data-stop="4" aria-labelledby="berlin-h">
+    <div class="stop__grid">
+      <div class="stop__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Berlin · seit September 2023</p>
+        <h2 id="berlin-h">Das Management, das mir gefehlt hat.</h2>
+      </div>
+      <div class="stop__body" data-sc-in data-sc-stagger="70">
+        <div class="degree">
+          <img class="logo logo--hsf" src="assets/logos/fresenius.svg" width="133" height="32" alt="Hochschule Fresenius">
+          <b>Master of Arts, International Management</b>
+          <span>Hochschule Fresenius Berlin, abgeschlossen 2026</span>
+        </div>
+        <ul class="modules">
+          <li><span class="label">Managing Transformation &amp; Change</span><span>Wie Organisationen Veränderung planen und die Menschen dabei mitnehmen.</span></li>
+          <li><span class="label">Leadership &amp; HR in Global Organizations</span><span>Führung über Länder und Kulturen hinweg.</span></li>
+          <li><span class="label">Entrepreneurship</span><span>Was ich in meiner Firma erlebt hatte, jetzt mit Methode.</span></li>
+          <li><span class="label">Digital Project Management</span><span>Projekte planen, steuern und sauber dokumentieren.</span></li>
+        </ul>
+        <p class="small">Meine Masterarbeit über emotionale und künstliche Intelligenz in interkulturellen Teams wurde 2026 als Fachartikel veröffentlicht. <a class="link-out" href="https://doi.org/10.52398/gjsd.2026.v6.i1.pp150-170">Artikel lesen</a></p>
+      </div>
+    </div>
+
+    <div class="stop__grid" style="margin-top: calc(var(--sc-section) * .6)">
+      <div class="stop__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Berlin · ab 2024</p>
+        <h3 class="sub">Arbeiten in Deutschland.</h3>
+      </div>
+      <ol class="jobs">
+        <li class="job" data-sc-in data-sc-stagger="60">
+          <div class="job__when"><div><p class="label">Okt 2024 bis Jan 2025</p><h3>CCVOSSEL GmbH, Berlin</h3></div><img class="logo logo--ccv" src="assets/logos/ccvossel-full.png" width="743" height="433" alt="CCVOSSEL"></div>
+          <div><p>Mein erster Job in Deutschland, in einem deutschen Team. IT-Betrieb für 26 Anwendungen nach den Sicherheitsstandards von BMW: Komponenten bestellen, Zertifikate ausstellen, Wissensartikel pflegen.</p></div>
+        </li>
+        <li class="job" data-sc-in data-sc-stagger="60">
+          <div class="job__when"><div><p class="label">März bis Aug 2025</p><h3>Accenture GmbH, Berlin</h3></div><img class="logo logo--accenture" src="assets/logos/accenture.svg" width="163" height="43" alt="Accenture"></div>
+          <div>
+            <p>Zurück bei Accenture, diesmal als Management Consulting Associate in einem laufenden SAP-Programm.</p>
+            <p>Analysen und Präsentationen für Termine mit dem Senior Management, Jira-Dashboards für die Programmleitung und automatisierte Feedback- und Reporting-Abläufe für ein Team von sieben Personen.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- HEUTE: purpose -->
+  <section class="today page" id="heute" data-stop="5" aria-labelledby="heute-h">
+    <div class="today__in" data-sc-in data-sc-stagger="80">
+      <p class="label">Berlin · heute</p>
+      <h2 id="heute-h">Heute arbeite ich jeden Tag mit KI. Und ich sehe, <em>was sie mit Teams macht.</em></h2>
+      <div class="today__cols">
+        <p>Wenn KI in ein Team kommt, ist die Technik selten das Problem. Es gibt Unsicherheit und oft echte Angst. Die menschliche Seite der Einführung entscheidet, ob es funktioniert.</p>
+        <p>Genau da will ich ansetzen: Teams begleiten, damit sie KI ohne Angst einsetzen und produktiver arbeiten. Mit dem Blick eines Technikers und der Erfahrung eines Gründers.</p>
+      </div>
+      <div class="offer" id="angebot">
+        <h3 class="offer__h">Wobei ich Ihr Unternehmen unterstützen kann.</h3>
+        <ul class="offer__list">
+          <li>
+            <h4>KI-Kompetenz im Team aufbauen</h4>
+            <p>Ich zeige Ihren Mitarbeitenden, wie sie KI-Werkzeuge wie Claude sicher und sinnvoll im Arbeitsalltag nutzen, an ihren eigenen Aufgaben statt an Beispielen aus dem Lehrbuch.</p>
+            <p class="offer__proof"><span class="label">Erfahrung</span>Ich arbeite jeden Tag mit KI und habe bei Accenture neue Analysten eingearbeitet und geschult.</p>
+          </li>
+          <li>
+            <h4>Die Einführung als Veränderung begleiten</h4>
+            <p>Ich nehme Unsicherheit und Angst ernst, bevor daraus Widerstand wird: klar erklären, was sich ändert, Fragen Raum geben, die Menschen mitnehmen.</p>
+            <p class="offer__proof"><span class="label">Erfahrung</span>Master mit Managing Transformation &amp; Change, Masterarbeit und Fachartikel über psychologische Sicherheit und KI-Werkzeuge in Teams.</p>
+          </li>
+          <li>
+            <h4>Abläufe mit KI vereinfachen</h4>
+            <p>Ich finde wiederkehrende Aufgaben, die Ihrem Team Zeit kosten, und baue einfache Lösungen dafür. So wird KI im Alltag spürbar produktiver.</p>
+            <p class="offer__proof"><span class="label">Erfahrung</span>Bei Accenture Berlin habe ich Feedback- und Reporting-Abläufe für ein Team von sieben Personen automatisiert. Den KI-Coach unten habe ich selbst gebaut.</p>
+          </li>
+        </ul>
+        <p class="offer__law">Übrigens: Seit Februar 2025 verlangt der EU AI Act von Unternehmen, die KI einsetzen, dass ihre Mitarbeitenden über ausreichende KI-Kompetenz verfügen (Artikel 4).</p>
+      </div>
+      <div class="build-note">
+        <p class="label">Was ich selbst baue</p>
+        <p><strong>Clueless Consultant Coach:</strong> ein KI-Coach, an dem junge Beraterinnen und Berater Kundenfälle üben. Er widerspricht zuerst und lobt danach.</p>
+        <a class="link-out" href="https://clueless-consultant.streamlit.app/">Coach öffnen</a>
+        <p class="small">Die App braucht beim ersten Öffnen einen Moment zum Aufwachen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT: name, email, LinkedIn. Holds to the end. -->
+  <section class="arrival page" id="kontakt" data-stop="6" aria-labelledby="kontakt-h">
+    <div class="contact" data-sc-in data-sc-stagger="70">
+      <p class="label">Kontakt</p>
+      <h2 class="contact__name" id="kontakt-h">Antony Shreyas</h2>
+      <ul class="contact__links">
+        <li><span class="label">E-Mail</span><a href="mailto:antonyshreyas777@gmail.com">antonyshreyas777@gmail.com</a></li>
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/antonyshreyasm">linkedin.com/in/antonyshreyasm</a></li>
+      </ul>
+    </div>
+    <p class="foot label">© 2026 Antony Shreyas · Berlin</p>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+  ScrollCraft.mount(document.body);
+
+  (function () {
+    var root = document.documentElement;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    var fine = matchMedia('(hover: hover) and (pointer: fine)');
+    var mobile = matchMedia('(max-width: 860px)');
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+    function smooth(t) { return t * t * (3 - 2 * t); }
+
+    /* ---- the chart: a graticule of dots, drawn once ---- */
+    var NS = 'http://www.w3.org/2000/svg';
+    var grid = document.getElementById('grid');
+    // equirectangular: lon -5..95 -> x 0..1000, lat 65..5 -> y 0..620
+    function X(lon) { return (lon + 5) * 10; }
+    function Y(lat) { return (65 - lat) * 10.333; }
+    for (var lon = 0; lon <= 90; lon += 5) {
+      for (var lat = 10; lat <= 60; lat += 5) {
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('class', 'grid-dot'); c.setAttribute('cx', X(lon)); c.setAttribute('cy', Y(lat)); c.setAttribute('r', 1.6);
+        grid.appendChild(c);
+      }
+    }
+    // simplified outlines, lon/lat, enough to recognise the two countries
+    var LAND = {
+      'Indien': { label: [79.5, 22], pts: [[68.2,23.7],[70,20.8],[72.8,19],[73.7,15.5],[74.9,12.8],[76.3,9.9],[77.5,8.1],[78.2,8.9],[79.8,10.3],[80.3,13.1],[80.2,15.8],[82.3,16.9],[84.9,19.3],[86.7,20.5],[87,21.6],[88.5,21.8],[89,22.5],[88.7,24.2],[88.2,25.8],[89.8,26.4],[92,26.8],[95.5,27.9],[97,28.2],[94.6,29.2],[92,27.8],[88.9,27.3],[88.1,27.8],[85.9,26.9],[84,27.4],[81.1,28.6],[80.1,30.4],[78.8,31.3],[78.7,32.6],[77.8,35.5],[75,36.6],[74,34.8],[74.6,32.7],[73.9,30.5],[71.9,27.9],[70.2,28],[69.5,26.7],[70.7,25.6],[68.8,24.3]] },
+      'Deutschland': { label: [10.2, 45.6], pts: [[6,51.8],[5.9,50.8],[6.4,49.5],[8.2,49],[7.6,47.6],[9.6,47.5],[10.5,47.4],[12.9,47.6],[13,48.2],[13.8,48.8],[12.1,50.3],[14.8,51],[14.6,52],[14.2,53],[14.4,53.9],[13.4,54.5],[12,54.2],[10.9,54],[11,54.4],[9.9,54.8],[8.6,54.9],[8.6,53.9],[7.1,53.7],[7,52.3],[6.7,52]] }
+    };
+    Object.keys(LAND).forEach(function (name) {
+      var d = LAND[name].pts.map(function (p, i) { return (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1); }).join(' ') + ' Z';
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('class', 'land'); path.setAttribute('d', d);
+      grid.appendChild(path);
+      var t = document.createElementNS(NS, 'text');
+      t.setAttribute('class', 'land-label'); t.setAttribute('x', X(LAND[name].label[0])); t.setAttribute('y', Y(LAND[name].label[1]));
+      t.setAttribute('text-anchor', 'middle'); t.textContent = name.toUpperCase();
+      grid.appendChild(t);
+    });
+    [20, 40, 60].forEach(function (lat) {
+      var l = document.createElementNS(NS, 'line');
+      l.setAttribute('class', 'lat'); l.setAttribute('x1', 0); l.setAttribute('x2', 1000); l.setAttribute('y1', Y(lat)); l.setAttribute('y2', Y(lat));
+      grid.appendChild(l);
+      var t = document.createElementNS(NS, 'text');
+      t.setAttribute('class', 'lat-label'); t.setAttribute('x', 4); t.setAttribute('y', Y(lat) - 8); t.textContent = lat + '° N';
+      grid.appendChild(t);
+    });
+
+    /* ---- the signature: scroll flies the plane along the route ---- */
+    var flight = document.getElementById('flug');
+    var flown = document.getElementById('route-flown');
+    var planeG = document.getElementById('plane-g');
+    var km = document.getElementById('km');
+    var blrHalo = document.querySelector('#city-blr .halo');
+    var berHalo = document.querySelector('#city-ber .halo');
+    var LEN = flown.getTotalLength();
+    var DIST = 7130;
+    flown.style.strokeDasharray = LEN + ' ' + LEN;
+    var fmt = new Intl.NumberFormat('de-DE');
+
+    function pinP(el) {
+      var travel = Math.max(el.offsetHeight - innerHeight, 1);
+      return clamp(-el.getBoundingClientRect().top / travel);
+    }
+
+    var lastT = -1;
+    function fly(p) {
+      // flight window inside the pin: take off at 0.1, land at 0.82
+      var t = reduce.matches ? 1 : smooth(clamp((p - 0.1) / 0.72));
+      if (Math.abs(t - lastT) < 0.0005) return;
+      lastT = t;
+      flown.style.strokeDashoffset = (LEN * (1 - t)).toFixed(2);
+      var L = Math.max(0.5, Math.min(LEN - 0.5, LEN * t));
+      var a = flown.getPointAtLength(L - 0.5);
+      var b = flown.getPointAtLength(L + 0.5);
+      var pt = flown.getPointAtLength(L);
+      var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+      // the plane climbs and descends: a little bigger mid-flight
+      var s = 1 + Math.sin(Math.PI * t) * 0.35;
+      planeG.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(' + s.toFixed(3) + ')');
+      km.textContent = fmt.format(Math.round(DIST * t / 10) * 10);
+      blrHalo.style.opacity = t < 0.04 ? 1 - t / 0.04 : 0;
+      berHalo.style.opacity = t >= 0.999 ? 1 : 0;
+    }
+
+    /* ---- the route rail: the nav is the trip ---- */
+    var stops = Array.prototype.slice.call(document.querySelectorAll('[data-stop]'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+    var items = Array.prototype.slice.call(document.querySelectorAll('.rail li'));
+    var nowLabel = document.querySelector('.rail__now');
+    var nights = Array.prototype.slice.call(document.querySelectorAll('[data-night]'));
+    var N = stops.length;
+    function placeDots() {
+      items.forEach(function (li, i) {
+        var f = (i / (N - 1) * 100) + '%';
+        if (mobile.matches) { li.style.top = ''; li.style.left = f; }
+        else { li.style.left = ''; li.style.top = f; }
+      });
+    }
+    var chart = document.getElementById('chart');
+    function frameChart() { chart.setAttribute('viewBox', mobile.matches ? '100 60 940 580' : '0 0 1060 640'); }
+    function onLayout() { placeDots(); frameChart(); }
+    onLayout();
+    mobile.addEventListener('change', onLayout);
+
+    function railP() {
+      var y = scrollY + innerHeight * 0.45;
+      var tops = stops.map(function (s) { return s.getBoundingClientRect().top + scrollY; });
+      var max = document.documentElement.scrollHeight - innerHeight;
+      if (scrollY >= max - 2) return N - 1;
+      for (var i = N - 1; i >= 0; i--) {
+        if (y >= tops[i]) {
+          if (i === N - 1) return i;
+          return i + clamp((y - tops[i]) / (tops[i + 1] - tops[i]));
+        }
+      }
+      return 0;
+    }
+
+    var lastIdx = -1;
+    function rail() {
+      var f = railP();
+      root.style.setProperty('--rail-p', (f / (N - 1)).toFixed(4));
+      var idx = Math.min(N - 1, Math.floor(f + 0.02));
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        links.forEach(function (a, i) {
+          a.classList.toggle('is-past', i < idx || (i === idx));
+          a.classList.toggle('is-here', i === idx);
+          if (i === idx) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
+        });
+        nowLabel.textContent = links[idx].textContent;
+      }
+      var probe = mobile.matches ? 22 : innerHeight * 0.5;
+      var night = nights.some(function (s) { var r = s.getBoundingClientRect(); return r.top <= probe && r.bottom >= probe; });
+      root.classList.toggle('is-night', night);
+    }
+
+    /* ---- portrait pointer depth ---- */
+    var portrait = document.getElementById('portrait');
+    var mx = 0, my = 0, tx = 0, ty = 0;
+    addEventListener('pointermove', function (e) {
+      if (!fine.matches || reduce.matches) return;
+      tx = (e.clientX / innerWidth - 0.5) * 2;
+      ty = (e.clientY / innerHeight - 0.5) * 2;
+    }, { passive: true });
+
+    function frame() {
+      fly(pinP(flight));
+      rail();
+      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+      portrait.style.setProperty('--mx', mx.toFixed(3));
+      portrait.style.setProperty('--my', my.toFixed(3));
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+</script>
+</body>
+</html>
